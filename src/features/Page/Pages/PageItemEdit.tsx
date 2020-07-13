@@ -21,6 +21,8 @@ import AppSelector from '../../../app/Formik/AppSelector';
 import ButtonGroup from '../../../app/Formik/ButtonGroup';
 import HtmlEdit from '../../../app/Formik/HtmlEdit';
 import CategoryTree from '../PageItemCategory/CategoryTree';
+import { Uploader, Icon } from 'rsuite';
+import PagePhotos from './PagePhotos';
 
 
 const validationSchema = Yup.object().shape({
@@ -33,6 +35,21 @@ const validationSchema = Yup.object().shape({
 interface DetailParms {
     id: string
 }
+
+const fileList = [
+    {
+        // name: 'a.png',
+        fileKey: "1",
+        url:
+            'https://res.cloudinary.com/dzcblkurm/image/upload/v1594359825/bflqvdkbldgnf89q8tnm.jpg'
+    },
+    {
+        //name: 'b.png',
+        fileKey: "bflqvdkbldgnf89q8tnm",
+        url:
+            'https://user-images.githubusercontent.com/1203827/47638807-9d947980-db9a-11e8-9ee5-e0cc9cd7e8ad.png'
+    }
+];
 
 const PageItemEdit: React.FC<RouteComponentProps<DetailParms>> = ({ match, history }) => {
 
@@ -52,11 +69,13 @@ const PageItemEdit: React.FC<RouteComponentProps<DetailParms>> = ({ match, histo
     const [catList, setCatList] = useState([]);
     const [page, setPage] = useState(new Page());
 
+
+
     useEffect(() => {
 
         UpdateCategoryList().then((ct) => {
             setCatList((ct as any));
-            debugger;
+            //debugger;
         });
 
         //debugger;
@@ -86,6 +105,9 @@ const PageItemEdit: React.FC<RouteComponentProps<DetailParms>> = ({ match, histo
         }
     }
 
+
+
+
     return (
         <AppForm initialValues={page} validationSchema={validationSchema} onSubmit={onPageSubmit} loadingInitial={loadingInitial} >
             <CategoryTree setParentList={setCatList} />
@@ -95,7 +117,12 @@ const PageItemEdit: React.FC<RouteComponentProps<DetailParms>> = ({ match, histo
             <AppFormField name="Description" placeholder="Description" />
             {/* <AppFormField name="CategoryId" placeholder="CategoryId" /> */}
             <AppFormField name="URLTitle" placeholder="Page URL" />
+
+            <PagePhotos Id={page.Id} name="Photos" imageList={page.Photos} />
+
             <HtmlEdit name="PageHtml" placeholder="Page Content" />
+
+
 
 
             <ButtonGroup>

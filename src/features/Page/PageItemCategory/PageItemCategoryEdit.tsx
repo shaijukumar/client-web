@@ -159,7 +159,7 @@ const PageItemCategoryEdit: React.FC<RouteComponentProps<DetailParms>> = ({ matc
                                 content='Submit'
                             />
 
-                            {category.Id &&
+                            {/* {category.Id &&
                                 <Button
                                     type='button'
                                     loading={submitting}
@@ -170,7 +170,7 @@ const PageItemCategoryEdit: React.FC<RouteComponentProps<DetailParms>> = ({ matc
                                             .then(() => { history.push('/PageItemCategorys'); });
                                     }}
                                 />
-                            }
+                            } */}
 
                             <Button
                                 onClick={() => history.push('/PageItemCategorys')}

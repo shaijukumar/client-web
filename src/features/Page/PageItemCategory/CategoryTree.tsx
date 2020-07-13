@@ -26,6 +26,7 @@ const CategoryTree: React.FC<{ setParentList: any }> = ({ setParentList }) => {
         catTree,
         createPageItemCategory,
         editPageItemCategory,
+        deletePageItemCategory,
         submitting }
         = rootStore.pageItemCategoryStore;
 
@@ -46,19 +47,32 @@ const CategoryTree: React.FC<{ setParentList: any }> = ({ setParentList }) => {
     });
 
     const onSubmit = (values: any) => {
+        // debugger;
+        // if (!cat.Id) {
+        //     createPageItemCategory(values);
+        // } else {
+        // }
+
+        editPageItemCategory(values).then(() => {
+            UpdateCategoryList().then((ct) => {
+                //debugger;
+                setCatList((ct as any));
+                setParentList((ct as any));
+            });
+        });
+
+    }
+
+    const deleteItem = () => {
         debugger;
-        if (!cat.Id) {
-            createPageItemCategory(values);
-        } else {
-            editPageItemCategory(values).then(() => {
+        if (cat.Id) {
+            deletePageItemCategory(cat.Id).then(() => {
                 UpdateCategoryList().then((ct) => {
-                    setCatList((ct as any));
-                    setParentList((ct as any));
+                    // debugger;
                 });
             });
         }
     }
-
 
     const styles = { width: 400, display: 'block', marginBottom: 10 };
     return (
@@ -83,7 +97,6 @@ const CategoryTree: React.FC<{ setParentList: any }> = ({ setParentList }) => {
                                         loadPageItemCategory(catId).then((c) => {
                                             setCat(c);
                                         })
-                                        debugger;
                                     }}
                                     defaultExpandAll
                                 />
@@ -119,6 +132,7 @@ const CategoryTree: React.FC<{ setParentList: any }> = ({ setParentList }) => {
 
                             <ButtonGroup>
                                 <SubmitButton title={cat.Id == undefined ? "Submit" : "Update"} loader={submitting} />
+                                <AppButton title="Delete" onClick={() => deleteItem()} loader={submitting} />
                                 <AppButton title="Cancel" onClick={() => setShow(false)} loader={submitting} />
                             </ButtonGroup>
 

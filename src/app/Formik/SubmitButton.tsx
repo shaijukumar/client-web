@@ -11,8 +11,10 @@ const SubmitButton: React.FC<{ title: string, loader?: boolean }> = ({ title, lo
     return (
         <AppButton
             onClick={() => { handleSubmit() }}
-            title={title}
-            loader={loader} />
+            title={dirty ? title : "NA"}
+            loader={loader}
+            disabled={!dirty}
+        />
     )
 }
 

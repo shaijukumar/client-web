@@ -23,7 +23,11 @@ import PageItemList from "../../features/Page/Pages/PageItemList";
 import PageItemEdit from "../../features/Page/Pages/PageItemEdit";
 import PageView from "../../features/PageView/PageView";
 import AdminPannel from "../../features/Admin/AdminPannel";
-
+import StockCatItemEdit from "../../features/StockCat/StockCatEdit";
+import StockCatList from "../../features/StockCat/StockCatList";
+import StockManagemntList from '../../features/StockManagemnt/StockManagemntList';
+import StockManagemntEdit from '../../features/StockManagemnt/StockManagemntEdit';
+//##FeatureImport##"
 
 export const App: React.FC<RouteComponentProps> = ({ location }) => {
 
@@ -59,19 +63,13 @@ export const App: React.FC<RouteComponentProps> = ({ location }) => {
                 <Route key={location.key} path={['/PageItemEdit/:id', '/PageItemEdit/']} component={PageItemEdit} />
                 <Route key={location.key} path={['/Page/:id', '/Page/']} component={PageView} />
 
+                <Route key={location.key} path='/StockCatList' component={StockCatList} />
+                <Route key={location.key} path={['/StockCatItemEdit/:id', '/StockCatItemEdit/']} component={StockCatItemEdit} />
+                <Route key={location.key} path='/StockManagemntList' component={StockManagemntList} />
+								<Route key={location.key} path={['/StockManagemntItemEdit/:id', '/StockManagemntItemEdit/']} component={StockManagemntEdit} />
+								{/*##Navigation##*/}
 
 
-                {/* <Route exact path='/activities' component={ActivityDashboard} />
-                        <Route path='/activities/:id' component={ActivityDetails} />
-                        <Route key={location.key} path={['/createActivity', '/manage/:id']} component={ActivityForm} />                         
-                        <Route path='/profile/:username' component={ProfilePage} />
-
-                        <Route path='/PageItemCategorys' component={PageItemCategoryList} />                       
-                        <Route key={location.key} path={['/createNewCategory/', '/createCategory/:parent', '/editCategory/:id']} component={PageItemCategoryEdit} /> 
-
-                        
-
-                        <Route key={location.key} path={['/Page/:id', '/Page/']} component={PageView} />  */}
 
                 <Route component={NotFound} />
               </Switch>
@@ -85,3 +83,10 @@ export const App: React.FC<RouteComponentProps> = ({ location }) => {
 }
 
 export default withRouter(observer(App))
+
+
+
+
+
+
+

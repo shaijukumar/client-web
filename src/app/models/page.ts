@@ -16,8 +16,14 @@ export class Page implements IPage {
   //Category?: string;
   URLTitle: string = "";
   PageHtml: string = "";
+  Photos: any[] = [];
 
   constructor(init?: IPage) {
     Object.assign(this, init);
   }
+}
+
+export interface IPagePhoto {
+  Id: string;
+  Url: string;
 }

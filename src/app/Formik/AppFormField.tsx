@@ -59,6 +59,7 @@ const AppFormField: React.FC<{
                         name={name}
                         value={String((values as any)[name])}
                         onChange={handleChange(name)}
+
                     />
                     {required && <HelpBlock>Required</HelpBlock>}
                     <ErrorMessage error={(errors as any)[name]} visible={(touched as any)[name]} />

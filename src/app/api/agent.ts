@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { IUser, IUserFormValues } from "../models/user";
 import { IProfile, IPhoto } from "../models/profile";
 import { IPageItemCategory } from "../models/PageItemCategory";
-import { IPage } from "../models/page";
+import { IPage, IPagePhoto } from "../models/page";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
@@ -119,9 +119,12 @@ const PageItem = {
   update: (page: IPage) => requests.put(`/Pages/${page.Id}`, page),
   delete: (id: string) =>
     requests.del(`/Pages/${id}`).then(sleep(400)).then(responseBody),
+  uploadPhoto: (id: string, photo: Blob): Promise<IPagePhoto> =>
+    requests.postForm(`/PagePhotos/${id}`, photo),
 };
 
 export default {
+  requests,
   Activities,
   User,
   Profiles,

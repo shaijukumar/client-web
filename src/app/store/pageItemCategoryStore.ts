@@ -64,7 +64,7 @@ export default class PageItemCategoryStore {
   }
 
   @action UpdateCategoryList = async () => {
-    debugger;
+    // debugger;
     let catTree: any[] = [];
     let catChild: any[] = [];
     var categorys = await agent.PageItemCategory.list();
@@ -133,6 +133,7 @@ export default class PageItemCategoryStore {
   };
 
   @action createPageItemCategory = async (category: IPageItemCategory) => {
+    debugger;
     this.submitting = true;
     try {
       await agent.PageItemCategory.create(category);
@@ -152,11 +153,16 @@ export default class PageItemCategoryStore {
   };
 
   @action editPageItemCategory = async (category: IPageItemCategory) => {
-    debugger;
+    //debugger;
     this.submitting = true;
     try {
-      await agent.PageItemCategory.update(category);
-      runInAction("editing category", () => {
+      if (category.Id == undefined) {
+        await agent.PageItemCategory.create(category);
+      } else {
+        await agent.PageItemCategory.update(category);
+      }
+
+      runInAction("updating category", () => {
         this.submitting = false;
         toast.error("Updated");
       });
@@ -170,23 +176,18 @@ export default class PageItemCategoryStore {
     }
   };
 
-  @action deletePageItemCategory = async (
-    event: SyntheticEvent<HTMLButtonElement>,
-    id: string
-  ) => {
+  @action deletePageItemCategory = async (id: string) => {
     this.submitting = true;
-    this.target = event.currentTarget.name;
+
     try {
       await agent.PageItemCategory.delete(id);
       runInAction("deleting category", () => {
         this.submitting = false;
-        this.target = "";
         toast.error("deleted");
       });
     } catch (error) {
       runInAction("delete category error, ", () => {
         this.submitting = false;
-        this.target = "";
         debugger;
         toast.error(
           "delete category error - " + error.data.errors.pageItemCategory

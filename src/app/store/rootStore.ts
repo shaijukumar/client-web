@@ -7,6 +7,9 @@ import ModalStore from "./modelStore";
 import ProfileStore from "./profileStore";
 import PageItemCategoryStore from "./pageItemCategoryStore";
 import PageStore from "./pageStore";
+import StockCatStore from "../../features/StockCat/StockCatStore";
+import StockManagemntStore from "../../features/StockManagemnt/StockManagemntStore";
+//##RootImport##
 
 configure({ enforceActions: "always" });
 
@@ -18,6 +21,9 @@ export class RootStore {
   profileStore: ProfileStore;
   pageItemCategoryStore: PageItemCategoryStore;
   pageStore: PageStore;
+  stockCatStore: StockCatStore;
+  stockManagemntStore: StockManagemntStore;
+  //##RootField##
 
   constructor() {
     this.activityStore = new ActivityStore(this);
@@ -27,6 +33,9 @@ export class RootStore {
     this.profileStore = new ProfileStore(this);
     this.pageItemCategoryStore = new PageItemCategoryStore(this);
     this.pageStore = new PageStore(this);
+    this.stockCatStore = new StockCatStore(this);
+    this.stockManagemntStore = new StockManagemntStore(this);
+    //##RootFieldConstructor##
   }
 }
 

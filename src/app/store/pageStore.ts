@@ -98,4 +98,22 @@ export default class PageStore {
       console.log(error);
     }
   };
+
+  @observable uploadingPhoto = false;
+  @action uploadPhoto = async (id: string, file: Blob) => {
+    this.uploadingPhoto = true;
+    try {
+      const photo = await agent.PageItem.uploadPhoto(id, file);
+      runInAction(() => {
+        this.uploadingPhoto = false;
+      });
+      return photo;
+    } catch (error) {
+      console.log(error);
+      toast.error("Problem uploading photo");
+      runInAction(() => {
+        this.uploadingPhoto = false;
+      });
+    }
+  };
 }
