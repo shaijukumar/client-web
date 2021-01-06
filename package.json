@@ -21,7 +21,7 @@
     "@types/revalidate": "^1.1.2",
     "@types/uuid": "^8.0.0",
     "@types/yup": "^0.29.3",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "date-fns": "^2.0.0",
     "final-form": "^4.19.1",
     "formik": "^2.1.4",
